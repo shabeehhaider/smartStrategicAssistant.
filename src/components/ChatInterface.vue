@@ -1,0 +1,298 @@
+<template>
+  <div class="chat-interface">
+    <div v-if="messages.length === 0" class="chat-header">
+      <h1 class="chat-title">المساعد الاستراتيجي الذكي</h1>
+      <!-- <h2 class="chat-subtitle">GRC Assistant</h2> -->
+      <p class="chat-description">حلول استراتيجية ذكية لنمو مؤسستك..</p>
+    </div>
+    
+    <div class="chat-content" :class="{ 'no-header': messages.length > 1 }">
+      <div class="messages-container" ref="messagesContainer">
+        <!-- Messages will be displayed here -->
+        <div v-for="message in messages" :key="message.id" class="message" :class="message.type">
+          <div class="message-content">
+            {{ message.content }}
+          </div>
+        </div>
+      </div>
+      
+      <div class="input-container">
+        <div class="input-wrapper">
+          <input 
+            v-model="currentMessage" 
+            @keyup.enter="sendMessage"
+            type="text" 
+            placeholder="تفضل واسأل أي شيء..."
+            class="chat-input"
+          />
+          <button @click="sendMessage" class="send-button">
+            <div class="send-icon"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+
+const currentMessage = ref('')
+const messages = ref([])
+
+const messagesContainer = ref(null)
+
+watch(messages, () => {
+  if (messagesContainer.value) {
+    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+  }
+})
+
+onMounted(() => {
+  if (messagesContainer.value) {
+    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+  }
+})
+
+function sendMessage() {
+  if (currentMessage.value.trim()) {
+    // Remove the initial assistant message if it exists and this is the first user message
+    if (
+      messages.value.length === 1 &&
+      messages.value[0].type === 'assistant' &&
+      messages.value[0].content === "مرحبًا بك في المساعد الاستراتيجي الذكي! كيف يمكنني مساعدتك اليوم؟"
+    ) {
+      messages.value = [];
+    }
+    messages.value.push({
+      id: Date.now(),
+      type: 'user',
+      content: currentMessage.value
+    })
+
+    // Simulate assistant response
+    setTimeout(() => {
+      messages.value.push({
+        id: Date.now() + 1,
+        type: 'assistant',
+        content: 'I understand your question. Let me help you with that...'
+      })
+    }, 1000)
+
+    currentMessage.value = ''
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$dark-bg: #2a2d3a;
+$darker-bg: #1e1f2b;
+$white15: rgba(255, 255, 255, 0.15);
+$white25: rgba(255, 255, 255, 0.25);
+$white50: rgba(255, 255, 255, 0.5);
+$border-radius: 12px;
+
+.chat-interface {
+  height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: relative;
+  margin: 20px 0 20px 10px;
+  border-radius: 30px;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.chat-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  z-index: 2;
+  
+  .chat-title {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    color: white;
+    direction: rtl;
+  }
+  
+  .chat-subtitle {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    background: linear-gradient(45deg, #64b5f6, #42a5f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .chat-description {
+    font-size: 16px;
+    opacity: 0.8;
+    margin: 0;
+    font-weight: 300;
+    direction: rtl;
+  }
+}
+
+.chat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.chat-content.no-header {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.messages-container {
+  flex: 1;
+  min-height: 200px;
+  max-height: 550px;
+  overflow-y: auto;
+  padding: 0;
+  direction: rtl;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127,156,245,0.05) transparent;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+    border-radius: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(127,156,245,0.7) 0%, rgba(95,108,175,0.7) 100%);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(127, 156, 245, 0.15);
+    transition: background 0.3s;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(165,180,252,0.9) 0%, rgba(127,156,245,0.9) 100%);
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+  }
+
+  .message {
+    margin-bottom: 20px;
+    display: flex;
+    &.user {
+      justify-content: flex-end;
+      .message-content {
+        background: $white25;
+        backdrop-filter: blur(20px);
+        border: 1px solid $white25;
+      }
+    }
+    &.assistant {
+      justify-content: flex-start;
+      .message-content {
+        background: $white15;
+        backdrop-filter: blur(20px);
+        border: 1px solid $white15;
+      }
+    }
+  }
+  .message-content {
+    max-width: 70%;
+    padding: 15px 20px;
+    border-radius: $border-radius;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.input-container {
+  padding: 0;
+  
+  .input-wrapper {
+    display: flex;
+    background: $white15;
+    backdrop-filter: blur(30px);
+    border: 1px solid $white25;
+    border-radius: 25px;
+    padding: 8px;
+    align-items: center;
+    text-align: right;
+    direction: rtl;
+    
+    .chat-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 16px;
+      padding: 12px 20px;
+      text-align: right;
+      
+      &::placeholder {
+        color: $white50;
+        direction: rtl;
+        text-align: right;
+      }
+    }
+    
+    .send-button {
+      background: linear-gradient(45deg, #64b5f6, #42a5f5);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+      
+      .send-icon {
+        width: 16px;
+        height: 16px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M2.01 21L23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .chat-header {
+    padding: 40px 20px 30px;
+    
+    .chat-title {
+      font-size: 36px;
+    }
+    
+    .chat-subtitle {
+      font-size: 24px;
+    }
+  }
+  
+  .messages-container .message-content {
+    max-width: 85%;
+  }
+}
+</style>
