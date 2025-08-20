@@ -17,7 +17,7 @@ body {
 html, body {
   height: 100%;
   width: 100%;
-  font-family: 'Harir', sans-serif;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   background: #181a20;
   color: #fff;
 }
@@ -40,7 +40,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   
   /* Arabic font variables */
-  /* --arabic-font-family: 'Harir', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  --arabic-font-family: 'Harir', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
