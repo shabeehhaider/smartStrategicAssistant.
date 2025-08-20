@@ -45,6 +45,29 @@ const chatHistory = ref([
   padding: 30px;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.25);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127,156,245,0.05) transparent;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+    border-radius: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(127,156,245,0.7) 0%, rgba(95,108,175,0.7) 100%);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(127, 156, 245, 0.15);
+    transition: background 0.3s;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(165,180,252,0.9) 0%, rgba(127,156,245,0.9) 100%);
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+  }
 }
 
 .chat-header {
@@ -81,31 +104,8 @@ const chatHistory = ref([
 .messages-container.history-list {
   flex: 1;
   min-height: 200px;
-  max-height: 430px;
-  overflow-y: auto;
   padding: 0;
   direction: rtl;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(127,156,245,0.05) transparent;
-  &::-webkit-scrollbar {
-    width: 10px;
-    background: transparent;
-    border-radius: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, rgba(127,156,245,0.7) 0%, rgba(95,108,175,0.7) 100%);
-    border-radius: 8px;
-    border: 2px solid transparent;
-    box-shadow: 0 2px 8px rgba(127, 156, 245, 0.15);
-    transition: background 0.3s;
-  }
-  &::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, rgba(165,180,252,0.9) 0%, rgba(127,156,245,0.9) 100%);
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 8px;
-  }
   .history-item {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.12);
@@ -139,5 +139,3 @@ const chatHistory = ref([
   }
 }
 </style>
-
-

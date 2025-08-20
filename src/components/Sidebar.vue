@@ -7,7 +7,7 @@
     </div> -->
 
     <!-- Search Bar -->
-    <div>
+    <div class="sidebar-top">
       <div class="search-container">
         <div class="search-wrapper">
           <input type="text" placeholder="بحث" class="search-input" />
@@ -46,7 +46,7 @@
         <span class="profile-subtitle">Saudi Arabia</span>
       </div>
       <div class="profile-menu">
-        <div class="menu-dots"></div>
+        <div class="menu-dots" @click="logout"></div>
       </div>
     </div>
   </div>
@@ -54,6 +54,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from 'vue-router';
 
 const navLinks = [
   { label: 'محادثة جديدة', icon: 'plus-icon', to: '/' },
@@ -64,9 +65,15 @@ const navLinks = [
 ];
 
 const activeNav = ref(0);
+const router = useRouter();
 
 function setActiveNav(idx) {
   activeNav.value = idx;
+}
+
+function logout() {
+  // Optionally clear user data here
+  router.push('/login');
 }
 </script>
 
@@ -81,7 +88,6 @@ $blue-accent: #64b5f6;
 
 .sidebar-wrapper {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   height: calc(100vh - 40px);
   color: white;
@@ -90,11 +96,13 @@ $blue-accent: #64b5f6;
   margin: 20px 10px;
   border-radius: 30px;
   padding: 30px;
+  overflow: hidden; // Prevent content from overflowing
 }
 
 .sidebar-header {
   margin-bottom: 32px;
   text-align: right;
+  flex-shrink: 0; // Prevent shrinking
 
   .sidebar-title {
     font-size: 20px;
@@ -105,8 +113,17 @@ $blue-accent: #64b5f6;
   }
 }
 
+.sidebar-top {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; // Important for flex child to be scrollable
+  overflow: hidden;
+}
+
 .search-container {
   margin-bottom: 24px;
+  flex-shrink: 0; // Keep search bar always visible
 
   .search-wrapper {
     position: relative;
@@ -151,7 +168,6 @@ $blue-accent: #64b5f6;
 }
 
 .nav-buttons {
-  // flex: 1;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -160,14 +176,40 @@ $blue-accent: #64b5f6;
   border-radius: 30px;
   padding: 10px;
   transition: transform 0.2s;
+  overflow-y: auto; // Add scrolling
+  min-height: 0; // Important for flex child to be scrollable
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127,156,245,0.05) transparent;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+    border-radius: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(127,156,245,0.7) 0%, rgba(95,108,175,0.7) 100%);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(127, 156, 245, 0.15);
+    transition: background 0.3s;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(165,180,252,0.9) 0%, rgba(127,156,245,0.9) 100%);
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+  }
 
   .nav-link {
     text-decoration: none;
     color: inherit;
+    flex-shrink: 0; // Prevent nav items from shrinking
 
     &.history-link {
       border-top: 1px solid rgba(255, 255, 255, 0.12);
       margin-top: 10px;
+      padding-top: 10px;
     }
   }
 
@@ -240,6 +282,7 @@ $blue-accent: #64b5f6;
   padding: 16px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   margin-top: 20px;
+  flex-shrink: 0; // Keep profile always visible
 
   .profile-info {
     flex: 1;
@@ -263,7 +306,8 @@ $blue-accent: #64b5f6;
     .menu-dots {
       width: 20px;
       height: 20px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(255,255,255,0.5)' viewBox='0 0 24 24'%3E%3Cpath d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E");
+      // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(255,255,255,0.5)' viewBox='0 0 24 24'%3E%3Cpath d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E");
+      background-image: url("@/assets/images/logout.svg");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;

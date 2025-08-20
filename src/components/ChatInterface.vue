@@ -15,43 +15,52 @@
           </div>
         </div>
       </div>
-      
-      <div class="input-container">
-        <div class="input-wrapper">
-          <input 
-            v-model="currentMessage" 
-            @keyup.enter="sendMessage"
-            type="text" 
-            placeholder="تفضل واسأل أي شيء..."
-            class="chat-input"
-          />
-          <button @click="sendMessage" class="send-button">
-            <div class="send-icon"></div>
-          </button>
-        </div>
+    </div>
+    
+    <div class="input-container">
+      <div class="input-wrapper">
+        <input 
+          v-model="currentMessage" 
+          @keyup.enter="sendMessage"
+          type="text" 
+          placeholder="تفضل واسأل أي شيء..."
+          class="chat-input"
+        />
+        <button @click="sendMessage" class="send-button">
+          <div class="send-icon"></div>
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
 
 const currentMessage = ref('')
 const messages = ref([])
 
 const messagesContainer = ref(null)
 
+function scrollToBottom() {
+  nextTick(() => {
+    setTimeout(() => {
+      if (messagesContainer.value) {
+        messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
+        console.log('Scrolled to bottom:', messagesContainer.value.scrollTop);
+      } else {
+        console.log('messagesContainer ref not found');
+      }
+    }, 50);
+  });
+}
+
 watch(messages, () => {
-  if (messagesContainer.value) {
-    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-  }
-})
+  scrollToBottom();
+}, { flush: 'post' })
 
 onMounted(() => {
-  if (messagesContainer.value) {
-    messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-  }
+  scrollToBottom();
 })
 
 function sendMessage() {
@@ -70,6 +79,9 @@ function sendMessage() {
       content: currentMessage.value
     })
 
+    // Clear input immediately
+    currentMessage.value = ''
+
     // Simulate assistant response
     setTimeout(() => {
       messages.value.push({
@@ -78,8 +90,6 @@ function sendMessage() {
         content: 'I understand your question. Let me help you with that...'
       })
     }, 1000)
-
-    currentMessage.value = ''
   }
 }
 </script>
@@ -110,6 +120,7 @@ $border-radius: 12px;
   text-align: center;
   padding: 60px 20px 40px;
   z-index: 2;
+  flex-shrink: 0;
   
   .chat-title {
     font-size: 36px;
@@ -146,6 +157,8 @@ $border-radius: 12px;
   margin: 0 auto;
   width: 100%;
   padding: 0 20px;
+  overflow: hidden;
+  min-height: 0; // Important for flex child to be scrollable
 }
 
 .chat-content.no-header {
@@ -156,15 +169,14 @@ $border-radius: 12px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  overflow: hidden;
+  min-height: 0; // Important for flex child to be scrollable
 }
 
 .messages-container {
   flex: 1;
-  min-height: 200px;
-  max-height: 550px;
   overflow-y: auto;
-  padding: 0;
+  padding: 20px 0;
   direction: rtl;
   scrollbar-width: thin;
   scrollbar-color: rgba(127,156,245,0.05) transparent;
@@ -219,7 +231,10 @@ $border-radius: 12px;
 }
 
 .input-container {
-  padding: 0;
+  flex-shrink: 0;
+  padding: 20px 0 0 0;
+  margin: 0 -30px -30px -30px;
+  padding: 20px 30px 30px 30px;
   
   .input-wrapper {
     display: flex;
@@ -231,6 +246,8 @@ $border-radius: 12px;
     align-items: center;
     text-align: right;
     direction: rtl;
+    max-width: 800px;
+    margin: 0 auto;
     
     .chat-input {
       flex: 1;
