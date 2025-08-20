@@ -87,7 +87,7 @@ function sendMessage() {
       messages.value.push({
         id: Date.now() + 1,
         type: 'assistant',
-        content: 'I understand your question. Let me help you with that...'
+        content: 'أفهم سؤالك. دعني أساعدك في ذلك...'
       })
     }, 1000)
   }
@@ -114,6 +114,7 @@ $border-radius: 12px;
   padding: 30px;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.25);
+  direction: rtl;
 }
 
 .chat-header {
