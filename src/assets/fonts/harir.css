@@ -1,0 +1,59 @@
+/* Harir Font - Arabic Typography */
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
+
+@font-face {
+    font-family: 'Harir';
+    src: url('@/assets/fonts/harir-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Harir';
+    src: url('@/assets/fonts/harir-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Arabic text styling utility classes */
+/* .arabic-text {
+  font-family: 'Harir', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  direction: rtl;
+  text-align: right;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'kern' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.arabic-text-light {
+  font-weight: 300;
+}
+
+.arabic-text-regular {
+  font-weight: 400;
+}
+
+.arabic-text-medium {
+  font-weight: 500;
+}
+
+.arabic-text-semibold {
+  font-weight: 600;
+}
+
+.arabic-text-bold {
+  font-weight: 700;
+}
+
+/* Global Arabic font configuration */
+/* :root {
+  --arabic-font-family: 'Harir', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} */
+
+/* Apply to elements with Arabic content */
+/* [lang="ar"], .ar, .arabic {
+  font-family: var(--arabic-font-family);
+  direction: rtl;
+  text-align: right;
+} */ 

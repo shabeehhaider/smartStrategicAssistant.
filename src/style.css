@@ -17,10 +17,13 @@ body {
 html, body {
   height: 100%;
   width: 100%;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-family: 'Harir', sans-serif;
   background: #181a20;
   color: #fff;
 }
+
+/* Import Harir font for Arabic text */
+/* @import url('./assets/fonts/harir.css'); */
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -35,6 +38,9 @@ html, body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Arabic font variables */
+  /* --arabic-font-family: 'Harir', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
 
 a {

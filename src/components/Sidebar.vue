@@ -272,6 +272,7 @@ $blue-accent: #64b5f6;
       direction: rtl;
       text-align: right;
       flex: 1;
+      font-feature-settings: 'liga' 1, 'calt' 1, 'kern' 1;
     }
   }
 }

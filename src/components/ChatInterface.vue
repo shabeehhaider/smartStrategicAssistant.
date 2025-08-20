@@ -23,7 +23,7 @@
           v-model="currentMessage" 
           @keyup.enter="sendMessage"
           type="text" 
-          placeholder="تفضل واسأل أي شيء..."
+          placeholder="تفضل واسأل أي سؤال..."
           class="chat-input"
         />
         <button @click="sendMessage" class="send-button">
@@ -262,7 +262,6 @@ $border-radius: 12px;
       &::placeholder {
         color: $white50;
         direction: rtl;
-        text-align: right;
       }
     }
     
