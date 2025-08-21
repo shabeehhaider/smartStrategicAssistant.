@@ -48,6 +48,7 @@ const chatHistory = ref([
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(127,156,245,0.05) transparent;
+  direction: rtl;
 
   &::-webkit-scrollbar {
     width: 10px;

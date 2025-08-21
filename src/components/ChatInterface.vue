@@ -1,5 +1,18 @@
 <template>
   <div class="chat-interface">
+    <!-- Animated video background - only show when no messages -->
+    <div v-if="messages.length === 0" class="video-background">
+      <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        class="background-video"
+      >
+        <source src="/src/assets/video/animated-lines.mp4" type="video/mp4">
+      </video>
+    </div>
+    
     <div v-if="messages.length === 0" class="chat-header">
       <h1 class="chat-title">المساعد الاستراتيجي الذكي</h1>
       <!-- <h2 class="chat-subtitle">GRC Assistant</h2> -->
@@ -117,11 +130,32 @@ $border-radius: 12px;
   direction: rtl;
 }
 
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 30px;
+  pointer-events: none;
+  
+  .background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    filter: blur(1px);
+  }
+}
+
 .chat-header {
   text-align: center;
   padding: 60px 20px 40px;
   z-index: 2;
   flex-shrink: 0;
+  position: relative;
   
   .chat-title {
     font-size: 36px;
@@ -154,33 +188,57 @@ $border-radius: 12px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 20px;
   overflow: hidden;
-  min-height: 0; // Important for flex child to be scrollable
+  min-height: 0;
+  // Remove padding to allow scrollbar to reach the edge
+  padding: 0;
 }
 
 .chat-content.no-header {
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-height: 0; // Important for flex child to be scrollable
+  min-height: 0;
+  // Remove padding to allow scrollbar to reach the edge  
+  padding: 0;
 }
 
 .messages-container {
   flex: 1;
   overflow-y: auto;
-  padding: 20px 0;
   direction: rtl;
+  // Add padding here instead, but exclude left side for scrollbar
+  padding: 20px 20px 20px 0;
+  // Ensure scrollbar appears at extreme left
+  margin-left: 0;
+  
+  // scrollbar-width: thin;
+  // scrollbar-color: rgba(127,156,245,0.7) transparent;
+
+  // &::-webkit-scrollbar {
+  //   width: 12px;
+  //   background: transparent;
+  // }
+  // &::-webkit-scrollbar-thumb {
+  //   background: linear-gradient(135deg, rgba(127,156,245,0.7) 0%, rgba(95,108,175,0.7) 100%);
+  //   border-radius: 6px;
+  //   border: 2px solid transparent;
+  //   background-clip: padding-box;
+  //   box-shadow: 0 2px 8px rgba(127, 156, 245, 0.15);
+  //   transition: background 0.3s;
+  // }
+  // &::-webkit-scrollbar-thumb:hover {
+  //   background: linear-gradient(135deg, rgba(165,180,252,0.9) 0%, rgba(127,156,245,0.9) 100%);
+  //   background-clip: padding-box;
+  // }
+  // &::-webkit-scrollbar-track {
+  //   background: transparent;
+  // }
+
   scrollbar-width: thin;
   scrollbar-color: rgba(127,156,245,0.05) transparent;
+  direction: rtl;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -205,6 +263,9 @@ $border-radius: 12px;
   .message {
     margin-bottom: 20px;
     display: flex;
+    // Add left padding to compensate for container padding removal
+    padding-left: 20px;
+    
     &.user {
       justify-content: flex-end;
       .message-content {
@@ -233,6 +294,10 @@ $border-radius: 12px;
 
 .input-container {
   flex-shrink: 0;
+  // Ensure input doesn't interfere with scroll area
+  z-index: 10;
+  position: relative;
+  // Keep original styling but ensure proper layering
   padding: 20px 0 0 0;
   margin: 0 -30px -30px -30px;
   padding: 20px 30px 30px 30px;
@@ -311,5 +376,4 @@ $border-radius: 12px;
   .messages-container .message-content {
     max-width: 85%;
   }
-}
-</style>
+}</style>
