@@ -1,3 +1,5 @@
+@import url('./assets/fonts/harir.css');
+
 *,
 *::before,
 *::after {
@@ -7,26 +9,18 @@
   font-family: inherit;
 }
 
-body {
-  background-image: url('@/assets/images/backgroundGradient.png');
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
 html, body {
   height: 100%;
   width: 100%;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-family: 'Avenir', sans-serif;
   background: #181a20;
   color: #fff;
 }
 
 /* Import Harir font for Arabic text */
-/* @import url('./assets/fonts/harir.css'); */
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -41,6 +35,25 @@ html, body {
   
   /* Arabic font variables */
   --arabic-font-family: 'Harir', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Arabic Unicode range */
+*:lang(ar),
+[dir="rtl"] {
+    font-family: 'Harir', 'Arial Unicode MS', sans-serif;
+}
+
+/* Or use Unicode range for automatic detection */
+@font-face {
+    font-family: 'MultiLang';
+    src: local('Harir');
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+    font-family: 'MultiLang';
+    src: local('Avenir');
+    unicode-range: U+0000-05FF, U+0700-074F, U+0780-08A0;
 }
 
 a {

@@ -1,6 +1,4 @@
-/* Harir Font - Arabic Typography */
-/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
-
+/* Harir Font - Arabic */
 @font-face {
     font-family: 'Harir';
     src: url('@/assets/fonts/harir-Regular.ttf') format('truetype');
@@ -11,49 +9,61 @@
 @font-face {
     font-family: 'Harir';
     src: url('@/assets/fonts/harir-Bold.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
 }
 
-
-/* Arabic text styling utility classes */
-/* .arabic-text {
-  font-family: 'Harir', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  direction: rtl;
-  text-align: right;
-  font-feature-settings: 'liga' 1, 'calt' 1, 'kern' 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Avenir Font - English */
+@font-face {
+    font-family: 'Avenir';
+    src: url('@/assets/fonts/avenir-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
 }
 
-.arabic-text-light {
-  font-weight: 300;
+@font-face {
+    font-family: 'Avenir';
+    src: url('@/assets/fonts/avenir-Book.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
 
-.arabic-text-regular {
-  font-weight: 400;
+@font-face {
+    font-family: 'Avenir';
+    src: url('@/assets/fonts/avenir-Regular.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
 }
 
-.arabic-text-medium {
-  font-weight: 500;
+@font-face {
+    font-family: 'Avenir';
+    src: url('@/assets/fonts/avenir-Heavy.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
 }
 
-.arabic-text-semibold {
-  font-weight: 600;
+@font-face {
+    font-family: 'Avenir';
+    src: url('@/assets/fonts/avenir-Black.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
 }
 
-.arabic-text-bold {
-  font-weight: 700;
+/* CSS Classes for Language-Specific Text */
+.text-arabic {
+    font-family: 'Harir', 'Arial Unicode MS', sans-serif;
+    direction: rtl;
+    text-align: right;
 }
 
-/* Global Arabic font configuration */
-/* :root {
-  --arabic-font-family: 'Harir', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-} */
+.text-english {
+    font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    direction: ltr;
+    text-align: left;
+}
 
-/* Apply to elements with Arabic content */
-/* [lang="ar"], .ar, .arabic {
-  font-family: var(--arabic-font-family);
-  direction: rtl;
-  text-align: right;
-} */ 
+/* Mixed content - fallback for both languages */
+.text-mixed {
+    font-family: 'Avenir', 'Harir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Arial Unicode MS', sans-serif;
+}
+
