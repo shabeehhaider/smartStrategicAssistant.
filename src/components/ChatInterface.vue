@@ -145,7 +145,7 @@ $border-radius: 12px;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.3;
+    opacity: 0.9;
     filter: blur(1px);
   }
 }
@@ -208,34 +208,8 @@ $border-radius: 12px;
   flex: 1;
   overflow-y: auto;
   direction: rtl;
-  // Add padding here instead, but exclude left side for scrollbar
   padding: 20px 20px 20px 0;
-  // Ensure scrollbar appears at extreme left
   margin-left: 0;
-  
-  // scrollbar-width: thin;
-  // scrollbar-color: rgba(127,156,245,0.7) transparent;
-
-  // &::-webkit-scrollbar {
-  //   width: 12px;
-  //   background: transparent;
-  // }
-  // &::-webkit-scrollbar-thumb {
-  //   background: linear-gradient(135deg, rgba(127,156,245,0.7) 0%, rgba(95,108,175,0.7) 100%);
-  //   border-radius: 6px;
-  //   border: 2px solid transparent;
-  //   background-clip: padding-box;
-  //   box-shadow: 0 2px 8px rgba(127, 156, 245, 0.15);
-  //   transition: background 0.3s;
-  // }
-  // &::-webkit-scrollbar-thumb:hover {
-  //   background: linear-gradient(135deg, rgba(165,180,252,0.9) 0%, rgba(127,156,245,0.9) 100%);
-  //   background-clip: padding-box;
-  // }
-  // &::-webkit-scrollbar-track {
-  //   background: transparent;
-  // }
-
   scrollbar-width: thin;
   scrollbar-color: rgba(127,156,245,0.05) transparent;
   direction: rtl;
