@@ -24,7 +24,21 @@
         <!-- Messages will be displayed here -->
         <div v-for="message in messages" :key="message.id" class="message" :class="message.type">
           <div class="message-content">
-            {{ message.content }}
+            <template v-if="message.type === 'assistant'">
+              <template v-if="message.isLoading">
+                <span class="typing-indicator" aria-label="loading">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </span>
+              </template>
+              <template v-else>
+                {{ message.displayedContent !== undefined ? message.displayedContent : message.content }}
+              </template>
+            </template>
+            <template v-else>
+              {{ message.content }}
+            </template>
           </div>
         </div>
       </div>
@@ -95,14 +109,44 @@ function sendMessage() {
     // Clear input immediately
     currentMessage.value = ''
 
-    // Simulate assistant response
+    // Add loading assistant message (three dots)
+    const loadingId = Date.now() + 1
+    messages.value.push({
+      id: loadingId,
+      type: 'assistant',
+      content: '',
+      displayedContent: '',
+      isLoading: true
+    })
+
+    // Simulate fetching assistant response, then type word-by-word
     setTimeout(() => {
-      messages.value.push({
-        id: Date.now() + 1,
-        type: 'assistant',
-        content: 'أفهم سؤالك. دعني أساعدك في ذلك...'
-      })
-    }, 1000)
+      const fullText = 'أفهم سؤالك. دعني أساعدك في ذلك...'
+
+      // Find the loading message and start typing
+      const idx = messages.value.findIndex(m => m.id === loadingId)
+      if (idx !== -1) {
+        const msg = messages.value[idx]
+        msg.isLoading = false
+        msg.displayedContent = ''
+
+        const words = fullText.split(' ')
+        let i = 0
+        const interval = setInterval(() => {
+          if (i < words.length) {
+            // Add next word with a space if not the first
+            msg.displayedContent += (i === 0 ? '' : ' ') + words[i]
+            i++
+            scrollToBottom()
+          } else {
+            clearInterval(interval)
+            // typing finished — set full content (optional) and keep displayedContent
+            msg.content = fullText
+            msg.displayedContent = fullText
+          }
+        }, 120)
+      }
+    }, 800)
   }
 }
 </script>
@@ -263,6 +307,30 @@ $border-radius: 12px;
     border-radius: $border-radius;
     font-size: 14px;
     line-height: 1.5;
+    display: inline-flex;
+    align-items: center;
+    white-space: pre-wrap;
+  }
+
+  // Typing indicator (three dots)
+  .typing-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      animation: typing-bounce 1.2s infinite ease-in-out;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+  }
+
+  @keyframes typing-bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-4px); opacity: 1; }
   }
 }
 
