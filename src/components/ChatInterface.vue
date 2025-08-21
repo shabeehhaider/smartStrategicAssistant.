@@ -1,7 +1,7 @@
 <template>
   <div class="chat-interface">
     <!-- Animated video background - only show when no messages -->
-    <div v-if="messages.length === 0" class="video-background">
+    <!-- <div v-if="messages.length === 0" class="video-background">
       <video 
         autoplay 
         muted 
@@ -11,7 +11,7 @@
       >
         <source src="/src/assets/video/animated-lines.mp4" type="video/mp4">
       </video>
-    </div>
+    </div> -->
     
     <div v-if="messages.length === 0" class="chat-header">
       <h1 class="chat-title">المساعد الاستراتيجي الذكي</h1>
@@ -65,7 +65,7 @@
 import { ref, watch, onMounted, nextTick } from 'vue'
 
 const currentMessage = ref('')
-const messages = ref([])
+const messages = ref([]) // Start with empty array - no initial message
 
 const messagesContainer = ref(null)
 
@@ -92,14 +92,7 @@ onMounted(() => {
 
 function sendMessage() {
   if (currentMessage.value.trim()) {
-    // Remove the initial assistant message if it exists and this is the first user message
-    if (
-      messages.value.length === 1 &&
-      messages.value[0].type === 'assistant' &&
-      messages.value[0].content === "مرحبًا بك في المساعد الاستراتيجي الذكي! كيف يمكنني مساعدتك اليوم؟"
-    ) {
-      messages.value = [];
-    }
+    // Add user message
     messages.value.push({
       id: Date.now(),
       type: 'user',
