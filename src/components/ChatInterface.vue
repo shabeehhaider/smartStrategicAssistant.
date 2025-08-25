@@ -132,7 +132,7 @@ function sendMessage() {
             scrollToBottom()
           } else {
             clearInterval(interval)
-            // typing finished — set full content (optional) and keep displayedContent
+            // typing finished – set full content (optional) and keep displayedContent
             msg.content = fullText
             msg.displayedContent = fullText
           }
@@ -237,7 +237,6 @@ $border-radius: 12px;
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
-  // Remove padding to allow scrollbar to reach the edge
   padding: 0;
 }
 
@@ -247,15 +246,13 @@ $border-radius: 12px;
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
-  // Remove padding to allow scrollbar to reach the edge  
   padding: 0;
 }
 
 .messages-container {
   flex: 1;
   overflow-y: auto;
-  direction: rtl;
-  padding: 20px 20px 20px 0;
+  padding: 20px;
   margin-left: 0;
   scrollbar-width: thin;
   scrollbar-color: rgba(127,156,245,0.05) transparent;
@@ -284,29 +281,31 @@ $border-radius: 12px;
   .message {
     margin-bottom: 20px;
     display: flex;
-    padding: 0 60px; // Add horizontal margins to center messages
+    max-width: 800px; // Limit the container width
+    margin-left: auto;
+    margin-right: auto;
     
     &.user {
-      justify-content: flex-end;
+      justify-content: flex-start;
       .message-content {
         background: $white25;
         backdrop-filter: blur(20px);
         border: 1px solid $white25;
-        margin-left: 80px; // Push user message more to the right
+        margin-left: 20px; // Reduced margin for better centering
       }
     }
     &.assistant {
-      justify-content: flex-start;
+      justify-content: flex-end;
       .message-content {
         background: $white15;
         backdrop-filter: blur(20px);
         border: 1px solid $white15;
-        margin-right: 80px; // Push assistant message more to the left
+        margin-right: 20px; // Reduced margin for better centering
       }
     }
   }
   .message-content {
-    max-width: 60%;
+    max-width: 70%; // Increased from 60% for better use of space
     padding: 15px 20px;
     border-radius: $border-radius;
     font-size: 22px;
@@ -340,10 +339,8 @@ $border-radius: 12px;
 
 .input-container {
   flex-shrink: 0;
-  // Ensure input doesn't interfere with scroll area
   z-index: 10;
   position: relative;
-  // Keep original styling but ensure proper layering
   padding: 20px 0 0 0;
   margin: 0 -30px -30px -30px;
   padding: 20px 30px 30px 30px;
@@ -408,5 +405,17 @@ $border-radius: 12px;
   
   .messages-container .message-content {
     max-width: 85%;
+  }
+  
+  .messages-container .message {
+    max-width: 100%;
+    padding: 0 10px;
+    
+    &.user .message-content {
+      margin-left: 10px;
+    }
+    &.assistant .message-content {
+      margin-right: 10px;
+    }
   }
 }</style>
