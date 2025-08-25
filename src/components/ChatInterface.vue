@@ -1,17 +1,13 @@
 <template>
   <div class="chat-interface">
     <!-- Animated video background - only show when no messages -->
-    <!-- <div v-if="messages.length === 0" class="video-background">
-      <video 
-        autoplay 
-        muted 
-        loop 
-        playsinline
-        class="background-video"
+    <div v-if="messages.length === 0" class="video-background">
+      <img 
+        src="/src/assets/video/tot.gif" 
+        alt="Background animation"
+        class="background-gif"
       >
-        <source src="/src/assets/video/animated-lines.mp4" type="video/mp4">
-      </video>
-    </div> -->
+    </div> 
     
     <div v-if="messages.length === 0" class="chat-header">
       <h1 class="chat-title">المساعد الاستراتيجي الذكي</h1>
@@ -168,15 +164,23 @@ $border-radius: 12px;
 }
 
 .video-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  overflow: hidden;
-  border-radius: 30px;
-  pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 30px;
+    pointer-events: none;
+
+  .background-gif {
+   width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+  }
   
   .background-video {
     width: 100%;
@@ -298,7 +302,7 @@ $border-radius: 12px;
     max-width: 70%;
     padding: 15px 20px;
     border-radius: $border-radius;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     display: inline-flex;
     align-items: center;

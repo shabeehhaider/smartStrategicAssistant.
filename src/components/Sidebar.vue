@@ -146,7 +146,7 @@ $blue-accent: #64b5f6;
       border: none;
       outline: none;
       color: white;
-      font-size: 14px;
+      font-size: 16px;
       direction: rtl;
       text-align: right;
 
@@ -267,7 +267,7 @@ $blue-accent: #64b5f6;
     }
 
     span {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
       direction: rtl;
       text-align: right;
@@ -291,7 +291,7 @@ $blue-accent: #64b5f6;
     flex-direction: column;
 
     .profile-name {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
       color: white;
       margin-bottom: 2px;
