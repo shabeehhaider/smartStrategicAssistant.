@@ -23,11 +23,11 @@
           :to="link.to"
           class="nav-link"
           :class="{ 'history-link': link.to === '/history' }"
+          @click.prevent.stop="onNavClick(link, idx)"
         >
           <div
             class="nav-button"
             :class="[link.icon, { active: activeNav === idx }]"
-            @click="setActiveNav(idx)"
           >
             <div class="button-icon" :class="link.icon"></div>
             <span>{{ link.label }}</span>
@@ -74,6 +74,26 @@ function setActiveNav(idx) {
 function logout() {
   // Optionally clear user data here
   router.push('/login');
+}
+
+function startNewChat() {
+  // Push a unique query param to force ChatInterface remount via key on route
+  router.push({ name: 'chat', query: { t: Date.now().toString() } });
+}
+
+function onNavClick(link, idx) {
+  setActiveNav(idx);
+  // Treat any navigation to chat ('/' or '/chat') as starting a new chat
+  if (link.icon === 'plus-icon' || link.to === '/' || link.to === '/chat') {
+    startNewChat();
+  } else {
+    // Navigate to the specified route (e.g., history)
+    if (typeof link.to === 'string') {
+      router.push(link.to);
+    } else {
+      router.push(link.to);
+    }
+  }
 }
 </script>
 
@@ -305,8 +325,8 @@ $blue-accent: #64b5f6;
 
   .profile-menu {
     .menu-dots {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(255,255,255,0.5)' viewBox='0 0 24 24'%3E%3Cpath d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E");
       background-image: url("@/assets/images/logout.svg");
       background-size: contain;
