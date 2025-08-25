@@ -42,8 +42,8 @@
         <div class="avatar-icon"></div>
       </div> -->
       <div class="profile-info">
-        <span class="profile-name">You</span>
-        <span class="profile-subtitle">Saudi Arabia</span>
+        <span class="profile-name">Admin</span>
+        <span class="profile-subtitle">Newera.ai</span>
       </div>
       <div class="profile-menu">
         <div class="menu-dots" @click="logout"></div>
@@ -105,7 +105,7 @@ $blue-accent: #64b5f6;
   flex-shrink: 0; // Prevent shrinking
 
   .sidebar-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     color: $blue-accent;
     margin: 0;
@@ -146,7 +146,7 @@ $blue-accent: #64b5f6;
       border: none;
       outline: none;
       color: white;
-      font-size: 16px;
+      font-size: 22px;
       direction: rtl;
       text-align: right;
 
@@ -267,7 +267,7 @@ $blue-accent: #64b5f6;
     }
 
     span {
-      font-size: 16px;
+      font-size: 22px;
       font-weight: 500;
       direction: rtl;
       text-align: right;
@@ -291,14 +291,14 @@ $blue-accent: #64b5f6;
     flex-direction: column;
 
     .profile-name {
-      font-size: 16px;
+      font-size: 22px;
       font-weight: 600;
       color: white;
       margin-bottom: 2px;
     }
 
     .profile-subtitle {
-      font-size: 16px;
+      font-size: 22px;
       color: rgba(255, 255, 255, 0.6);
     }
   }

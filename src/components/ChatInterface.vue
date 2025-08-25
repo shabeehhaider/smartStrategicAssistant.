@@ -3,7 +3,7 @@
     <!-- Animated video background - only show when no messages -->
     <div v-if="messages.length === 0" class="video-background">
       <img 
-        src="/src/assets/video/tot.gif" 
+        src="/src/assets/video/Background wave Lines (1).gif" 
         alt="Background animation"
         class="background-gif"
       >
@@ -49,9 +49,12 @@
           placeholder="تفضل واسأل أي سؤال..."
           class="chat-input"
         />
-        <button @click="sendMessage" class="send-button">
-          <div class="send-icon"></div>
-        </button>
+        <img 
+          @click="sendMessage" 
+          src="/src/assets/video/Send.gif" 
+          alt="Send message"
+          class="send-button-gif"
+        />
       </div>
     </div>
   </div>
@@ -165,21 +168,24 @@ $border-radius: 12px;
 
 .video-background {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    height: 400px;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
     overflow: hidden;
-    border-radius: 30px;
     pointer-events: none;
+    border-radius: 30px;
 
   .background-gif {
    width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 30px;
+    opacity: 0.2;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
   }
   
   .background-video {
@@ -193,13 +199,13 @@ $border-radius: 12px;
 
 .chat-header {
   text-align: center;
-  padding: 60px 20px 40px;
+  padding: 250px 20px 40px;
   z-index: 2;
   flex-shrink: 0;
   position: relative;
   
   .chat-title {
-    font-size: 36px;
+    font-size: 58px;
     font-weight: 600;
     margin: 0 0 15px 0;
     color: white;
@@ -207,7 +213,7 @@ $border-radius: 12px;
   }
   
   .chat-subtitle {
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 600;
     margin: 0 0 20px 0;
     background: linear-gradient(45deg, #64b5f6, #42a5f5);
@@ -217,7 +223,7 @@ $border-radius: 12px;
   }
   
   .chat-description {
-    font-size: 16px;
+    font-size: 28px;
     opacity: 0.8;
     margin: 0;
     font-weight: 300;
@@ -278,8 +284,7 @@ $border-radius: 12px;
   .message {
     margin-bottom: 20px;
     display: flex;
-    // Add left padding to compensate for container padding removal
-    padding-left: 20px;
+    padding: 0 60px; // Add horizontal margins to center messages
     
     &.user {
       justify-content: flex-end;
@@ -287,6 +292,7 @@ $border-radius: 12px;
         background: $white25;
         backdrop-filter: blur(20px);
         border: 1px solid $white25;
+        margin-left: 80px; // Push user message more to the right
       }
     }
     &.assistant {
@@ -295,14 +301,15 @@ $border-radius: 12px;
         background: $white15;
         backdrop-filter: blur(20px);
         border: 1px solid $white15;
+        margin-right: 80px; // Push assistant message more to the left
       }
     }
   }
   .message-content {
-    max-width: 70%;
+    max-width: 60%;
     padding: 15px 20px;
     border-radius: $border-radius;
-    font-size: 16px;
+    font-size: 22px;
     line-height: 1.5;
     display: inline-flex;
     align-items: center;
@@ -360,7 +367,7 @@ $border-radius: 12px;
       border: none;
       outline: none;
       color: white;
-      font-size: 16px;
+      font-size: 22px;
       padding: 12px 20px;
       text-align: right;
       
@@ -370,29 +377,16 @@ $border-radius: 12px;
       }
     }
     
-    .send-button {
-      background: linear-gradient(45deg, #64b5f6, #42a5f5);
-      border: none;
-      border-radius: 50%;
+    .send-button-gif {
       width: 50px;
       height: 50px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 50%;
+      object-fit: cover;
       transition: transform 0.2s;
       
       &:hover {
         transform: scale(1.05);
-      }
-      
-      .send-icon {
-        width: 16px;
-        height: 16px;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M2.01 21L23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
       }
     }
   }
