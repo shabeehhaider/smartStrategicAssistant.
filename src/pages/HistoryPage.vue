@@ -132,7 +132,7 @@ const chatHistory = ref([
     .history-meta {
       display: flex;
       gap: 16px;
-      font-size: 14px;
+      font-size: 16px;
       color: #bfc9e0;
       direction: rtl;
       text-align: right;
