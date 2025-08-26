@@ -22,10 +22,11 @@ const showSidebar = computed(() => route.meta.hideSidebar !== true)
     grid-template-columns: 1fr 420px;
     min-height: 100vh;
     background: #0D0D0D;
-    background-image: url('@/assets/images/baa882d2-3792-45b5-a1ed-5a099f0b9d40.jpg');
-    background-position: 50%;
+    background-image: url('@/assets/images/5507370.jpg');
+    background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    background-attachment: fixed;
   }
   .layout.no-sidebar {
     grid-template-columns: 1fr;

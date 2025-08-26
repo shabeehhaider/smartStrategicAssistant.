@@ -274,7 +274,9 @@ $blue-accent: #64b5f6;
       background-position: center;
 
       &.plus-icon {
-        background-image: url("@/assets/images/newChatBlack.svg");
+        background-image: url("@/assets/video/New chat.gif");
+        width: 35px;
+        height: 35px;
       }
 
       &.history-icon {
@@ -325,10 +327,10 @@ $blue-accent: #64b5f6;
 
   .profile-menu {
     .menu-dots {
-      width: 24px;
-      height: 24px;
+      width: 45px;
+      height: 45px;
       // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(255,255,255,0.5)' viewBox='0 0 24 24'%3E%3Cpath d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E");
-      background-image: url("@/assets/images/logout.svg");
+      background-image: url("@/assets/video/Log Out.gif");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
