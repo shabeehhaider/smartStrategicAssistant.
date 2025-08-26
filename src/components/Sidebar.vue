@@ -105,7 +105,7 @@ $blue-accent: #64b5f6;
   flex-shrink: 0; // Prevent shrinking
 
   .sidebar-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
     color: $blue-accent;
     margin: 0;
@@ -146,7 +146,7 @@ $blue-accent: #64b5f6;
       border: none;
       outline: none;
       color: white;
-      font-size: 22px;
+      font-size: 20px;
       direction: rtl;
       text-align: right;
 
@@ -267,7 +267,7 @@ $blue-accent: #64b5f6;
     }
 
     span {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 500;
       direction: rtl;
       text-align: right;
@@ -294,7 +294,7 @@ $blue-accent: #64b5f6;
       font-size: 22px;
       font-weight: 600;
       color: white;
-      margin-bottom: 2px;
+      margin-bottom: -10px;
     }
 
     .profile-subtitle {

@@ -3,7 +3,7 @@
     <!-- Animated video background - only show when no messages -->
     <div v-if="messages.length === 0" class="video-background">
       <img 
-        src="/src/assets/video/Background wave Lines (1).gif" 
+        src="/src/assets/video/Wave Loop.gif" 
         alt="Background animation"
         class="background-gif"
       >
@@ -168,10 +168,10 @@ $border-radius: 12px;
 
 .video-background {
     position: absolute;
-    top: 0;
+    top: -90px;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% + 80px);
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
@@ -182,7 +182,7 @@ $border-radius: 12px;
     height: 100%;
     object-fit: cover;
     border-radius: 30px;
-    opacity: 0.2;
+    opacity: 0.5;
     animation-duration: 8s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
@@ -199,13 +199,13 @@ $border-radius: 12px;
 
 .chat-header {
   text-align: center;
-  padding: 250px 20px 40px;
+  padding: 150px 20px 40px;
   z-index: 2;
   flex-shrink: 0;
   position: relative;
   
   .chat-title {
-    font-size: 58px;
+    font-size: 44px;
     font-weight: 600;
     margin: 0 0 15px 0;
     color: white;
@@ -213,7 +213,7 @@ $border-radius: 12px;
   }
   
   .chat-subtitle {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
     margin: 0 0 20px 0;
     background: linear-gradient(45deg, #64b5f6, #42a5f5);
@@ -223,7 +223,7 @@ $border-radius: 12px;
   }
   
   .chat-description {
-    font-size: 28px;
+    font-size: 24px;
     opacity: 0.8;
     margin: 0;
     font-weight: 300;
@@ -309,7 +309,7 @@ $border-radius: 12px;
     max-width: 60%;
     padding: 15px 20px;
     border-radius: $border-radius;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.5;
     display: inline-flex;
     align-items: center;
