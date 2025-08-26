@@ -23,11 +23,11 @@
           :to="link.to"
           class="nav-link"
           :class="{ 'history-link': link.to === '/history' }"
+          @click.prevent.stop="onNavClick(link, idx)"
         >
           <div
             class="nav-button"
             :class="[link.icon, { active: activeNav === idx }]"
-            @click="setActiveNav(idx)"
           >
             <div class="button-icon" :class="link.icon"></div>
             <span>{{ link.label }}</span>
@@ -74,6 +74,26 @@ function setActiveNav(idx) {
 function logout() {
   // Optionally clear user data here
   router.push('/login');
+}
+
+function startNewChat() {
+  // Push a unique query param to force ChatInterface remount via key on route
+  router.push({ name: 'chat', query: { t: Date.now().toString() } });
+}
+
+function onNavClick(link, idx) {
+  setActiveNav(idx);
+  // Treat any navigation to chat ('/' or '/chat') as starting a new chat
+  if (link.icon === 'plus-icon' || link.to === '/' || link.to === '/chat') {
+    startNewChat();
+  } else {
+    // Navigate to the specified route (e.g., history)
+    if (typeof link.to === 'string') {
+      router.push(link.to);
+    } else {
+      router.push(link.to);
+    }
+  }
 }
 </script>
 
@@ -156,8 +176,8 @@ $blue-accent: #64b5f6;
     }
 
     .search-icon {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       margin-left: 12px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(255,255,255,0.5)' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
       background-size: contain;
@@ -246,8 +266,8 @@ $blue-accent: #64b5f6;
     }
 
     .button-icon {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       margin-left: 12px;
       background-size: contain;
       background-repeat: no-repeat;
@@ -305,8 +325,8 @@ $blue-accent: #64b5f6;
 
   .profile-menu {
     .menu-dots {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(255,255,255,0.5)' viewBox='0 0 24 24'%3E%3Cpath d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'/%3E%3C/svg%3E");
       background-image: url("@/assets/images/logout.svg");
       background-size: contain;

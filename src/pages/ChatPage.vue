@@ -1,5 +1,5 @@
 <template>
-  <ChatInterface />
+  <ChatInterface :key="$route.fullPath" />
 </template>
 
 <script setup>
