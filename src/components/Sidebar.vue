@@ -252,16 +252,46 @@ $blue-accent: #64b5f6;
     }
 
     &.active {
-      background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
-      border: 2px solid #64b5f6;
-      box-shadow: 0 4px 16px rgba(100, 181, 246, 0.15);
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.25) 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        rgba(255, 255, 255, 0.05) 100%
+      );
+      backdrop-filter: blur(40px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+      border-left: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        0 16px 64px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(255, 255, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
       color: #fff;
+      position: relative;
+      overflow: hidden;
+      
+      // Glass reflection effect
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+        pointer-events: none;
+      }
+      
       .button-icon {
-        filter: brightness(2);
+        filter: brightness(1.8) drop-shadow(0 0 12px rgba(255, 255, 255, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
       }
       span {
         color: #fff;
-        font-weight: 700;
+        font-weight: 600;
+        text-shadow: 
+          0 1px 2px rgba(0, 0, 0, 0.4),
+          0 0 8px rgba(255, 255, 255, 0.2);
       }
     }
 
